@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "title": "Men Jacket",
+        "price": 4000,
+        "img": "img/fetured__img-1.jpg"
+    },
+    {
+        "id": 2,
+        "title": "'Women Costume",
+        "price": 8000,
+        "img": "img/fetured__img-2.jpg"
+    },
+    {
+        "id": 3,
+        "title": "Sweatshirt",
+        "price": 3000,
+        "img": "img/fetured__img-3.jpg"
+    },
+    {
+        "id": 4,
+        "title": "Trousers",
+        "price": 2500,
+        "img": "img/fetured__img-4.jpg"
+    },
+    {
+        "id": 5,
+        "title": "Women Jacket",
+        "price": 3500,
+        "img": "img/fetured__img-5.jpg"
+    },
+    {
+        "id": 6,
+        "title": "Women Blouse",
+        "price": 2500,
+        "img": "img/fetured__img-6.jpg"
+    }
+]
