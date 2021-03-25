@@ -1,8 +1,38 @@
 Vue.component('products', {
-    props: ['products'],
+    // components: { product },
+    data() {
+        return {
+            catalogUrl: '/catalogData.json',
+            products: [],
+            filtered: []
+        }
+    },
+    mounted() {
+        this.$parent.getJson(`${API + this.catalogUrl}`)
+            .then(data => {
+                for (let el of data) {
+                    this.products.push(el);
+                    this.filtered.push(el);
+                }
+            });
+        // this.$parent.getJson(`getProducts.json`)
+        //     .then(data => {
+        //         for (let el of data) {
+        //             this.products.push(el);
+        //             this.filtered.push(el);
+        //         }
+        //         console.log(this.filtered)
+        //     });
+    },
+    methods: {
+        filter(val) {
+            let regExp = new RegExp(val, 'i');
+            this.filtered = this.products.filter(el => regExp.test(el.title))
+        }
+    },
     template: ` <ul class="fetured__flex">
 
-                <product v-for="item of products" :product="item":key="item.id">
+                <product v-for="product of filtered" :product="product" :key="product.id">
                 </product>
 
                 </ul>`
@@ -13,7 +43,7 @@ Vue.component('product', { //@click="$root.addProduct(product)"
                     <div class="fetured__item-hover">
                         <img :src="product.img" class="fetured-img" width="360" height="420" alt="Мужчина">
                         <div class="fetured__item-overlay"></div>
-                        <button @click="$parent.$emit('add-product', product)" 
+                        <button  @click="$root.$refs.cart.addProduct(product)"
                         type="button" class="fetured__item-button"><img
                                 src="img/fetured__btn-basket.svg" class="fetured__item-pic-basket"
                                 alt="Кнопка добавления в корзину"> Add to
