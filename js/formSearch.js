@@ -1,5 +1,10 @@
 Vue.component('fsearch', {
-    template: `<form @submit.prevent="$root.filter()" 
+    data() {
+        return {
+            userSearch: ''
+        }
+    },
+    template: `<form @input.prevent='$parent.$refs.products.filter(userSearch)' 
                     action="#" class="search-form">
                     <button type="submit" class="header__button btn-search"><svg id="search-img" width="27"
                             height="28" viewBox="0 0 27 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -8,6 +13,6 @@ Vue.component('fsearch', {
                                 fill="#E8E8E8" />
                         </svg>
                  </button>
-                    <input v-model="$root.userSearch" type="text" id="header-search" class="header-search">
+                    <input v-model='userSearch' type="text" id="header-search" class="header-search">
                 </form>`
 });
