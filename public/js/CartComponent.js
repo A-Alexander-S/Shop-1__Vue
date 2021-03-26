@@ -37,18 +37,35 @@ Vue.component('cart', {
                     })
             }
         },
-        remove(item) {
-            this.$parent.getJson(`${API}/addToBasket.json`)
-                .then(data => {
-                    if (data.result === 1) {
-                        if (item.quantity > 1) {
-                            item.quantity--;
-                        } else {
-                            this.cartItems.splice(this.cartItems.indexOf(item), 1);
-                        }
-                    }
-                })
-        },
+        remove(product) {
+            for (let i = 0; i < this.cartItems.length; i++) {
+                if (this.cartItems[i].id_product === +product.id_product) {
+
+                    this.$parent.deleteJson(`/api/cart/${this.cartItems[i].id_product}`, this.cartItems[i])
+                        .then(data => {
+                            if (data.result === 1) {
+                                this.cartItems[i].quantity -= 1;
+                                if (this.cartItems[i].quantity === 0) {
+                                    this.cartItems.splice(i, 1)
+                                }
+
+                            }
+                        })
+                }
+            }
+        }
+        // remove(item) {
+        //     this.$parent.getJson(`${API}/addToBasket.json`)
+        //         .then(data => {
+        //             if (data.result === 1) {
+        //                 if (item.quantity > 1) {
+        //                     item.quantity--;
+        //                 } else {
+        //                     this.cartItems.splice(this.cartItems.indexOf(item), 1);
+        //                 }
+        //             }
+        //         })
+        // },
     },
     template: `<li class="header__list-item header__list-item--margin header__list-item-display ">
     <a @click="showCart = !showCart" href="#"
